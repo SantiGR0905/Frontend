@@ -1,26 +1,17 @@
-import React from "react";
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
-import Login from "./Pages/Login"; // Asegúrate de que la ruta sea correcta
-import CreateUser from "./Pages/CreateUser";
-import Products from "./Pages/Products";
-import Sales from "./Pages/Sales";
+// src/App.jsx
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './Pages/HomePage.jsx';
+import Login from './Pages/Login.jsx';
+import './App.css';
 
 function App() {
     return (
         <Router>
-            <div>
-                <h1>Welcome to ImmersiRoom</h1>
-                <nav>
-                    <Link to="/login">Login</Link>
-                    <Link to="/create-user">Register</Link>
-                    <Link to="/products">Products</Link>
-                    <Link to="/sales">Sales</Link>
-                </nav>
+            <div className="App">
                 <Routes>
+                    <Route path="/" element={<HomePage />} />
                     <Route path="/login" element={<Login />} />
-                    <Route path="/create-user" element={<CreateUser />} />
-                    <Route path="/products" element={<Products />} />
-                    <Route path="/sales" element={<Sales />} />
                 </Routes>
             </div>
         </Router>
@@ -28,3 +19,4 @@ function App() {
 }
 
 export default App;
+
