@@ -75,7 +75,7 @@ const Login = () => {
                     </div>
                     <div className="Registrar">
                         <p>¿No tienes cuenta?</p>
-                        <a href="/CreateUser.jsx">Registrate aquí</a>
+                        <a href="/CreateUser">Registrate aquí</a>
                     </div>
             </form>
         </div>
