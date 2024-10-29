@@ -1,4 +1,5 @@
 import {useState} from "react";
+import '../assets/Login.css';
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -44,33 +45,41 @@ const Login = () => {
     };
 
     return (
-        <div>
-            <h2>Login</h2>
-            {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
-            <form onSubmit={handleLogin}>
-                <div>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <button type="submit">Login</button>
-                </div>
+        <body className="login">
+            <div className="login-container">
+                <h2>Iniciar Sesión</h2>
+                {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
+                <form onSubmit={handleLogin}>
+                    <div>
+                        <label>Email:</label>
+                        <input
+                            placeholder="Email"
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label>Password:</label>
+                        <input
+                            placeholder="Password"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <button type="submit">Login</button>
+                    </div>
+                    <div className="Registrar">
+                        <p>¿No tienes cuenta?</p>
+                        <a href="/CreateUser">Registrate aquí</a>
+                    </div>
             </form>
         </div>
+        </body>
     );
 };
 

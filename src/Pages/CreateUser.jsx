@@ -42,22 +42,25 @@ const CreateUser = () => {
     };
 
     return (
-        <div className="User">
-            <h2>Create User</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>First Name:</label>
-                    <input
-                        type="text"
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleChange}
-                        required
-                    />
+        <body className="User">
+            <div className="UserContainer">
+                <h2>Registrarse</h2>
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label></label>
+                        <input
+                            placeholder="Nombre"
+                            type="text"
+                            name="firstName"
+                            value={formData.firstName}
+                            onChange={handleChange}
+                            required
+                        />
                 </div>
                 <div>
-                    <label>Last Name:</label>
+                    <label></label>
                     <input
+                        placeholder="Apellido"
                         type="text"
                         name="lastName"
                         value={formData.lastName}
@@ -66,8 +69,9 @@ const CreateUser = () => {
                     />
                 </div>
                 <div>
-                    <label>Email:</label>
+                    <label></label>
                     <input
+                        placeholder="Email"
                         type="email"
                         name="email"
                         value={formData.email}
@@ -76,8 +80,9 @@ const CreateUser = () => {
                     />
                 </div>
                 <div>
-                    <label>Password:</label>
+                    <label></label>
                     <input
+                        placeholder="Password"
                         type="password"
                         name="password"
                         value={formData.password}
@@ -86,8 +91,9 @@ const CreateUser = () => {
                     />
                 </div>
                 <div>
-                    <label>Date of birth:</label>
+                    <label></label>
                     <input
+                        placeholder="Fecha de Registro"
                         type="date"
                         name="date"
                         value={formData.date}
@@ -96,8 +102,9 @@ const CreateUser = () => {
                     />
                 </div>
                 <div>
-                    <label>User Type ID:</label>
+                    <label></label>
                     <input
+                        placeholder="2"
                         type="number"
                         name="userTypeId"
                         value={formData.userTypeId}
@@ -108,6 +115,7 @@ const CreateUser = () => {
                 <button type="submit">Create User</button>
             </form>
         </div>
+        </body>
     );
 };
 
