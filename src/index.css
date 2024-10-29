@@ -11,11 +11,12 @@ div {
   color: #000000;
 }
 a {
-  font-weight: 500;
+  font-weight: 700;
   color: #000000;
   text-decoration: inherit;
   padding: 1rem 2rem;
   margin-bottom: 1rem;
+  font-size: 1.5rem;
 }
 
 a:hover {
@@ -32,7 +33,7 @@ header{
   justify-content: space-between;
   flex-direction: row;
   background-color: #E1C699;
-  padding-bottom: 2rem;
+  padding: 2rem 0 3rem 0;
 }
 .Titulo {
   padding-left: 2rem;
@@ -64,4 +65,20 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.products {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.icono {
+  text-align: center;
+  img {
+    height: 10rem;
+  }
+  h3 {
+    text-transform: uppercase;
+  }
 }

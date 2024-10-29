@@ -8,7 +8,6 @@ const CreateUser = () => {
         lastName: "",
         email: "",
         password: "",
-        date: "",
         userTypeId: "",
     });
 
@@ -30,8 +29,7 @@ const CreateUser = () => {
                     lastName: formData.lastName,
                     email: formData.email,
                     password: formData.password,
-                    date: formData.date,
-                    userTypeId: parseInt(formData.userTypeId, 10),
+                    userTypeId: 1,
                 }
             );
             alert("User created successfully.");
@@ -86,28 +84,6 @@ const CreateUser = () => {
                         type="password"
                         name="password"
                         value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label></label>
-                    <input
-                        placeholder="Fecha de Registro"
-                        type="date"
-                        name="date"
-                        value={formData.date}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label></label>
-                    <input
-                        placeholder="2"
-                        type="number"
-                        name="userTypeId"
-                        value={formData.userTypeId}
                         onChange={handleChange}
                         required
                     />

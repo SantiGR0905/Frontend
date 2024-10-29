@@ -13,10 +13,10 @@ function HomePage() {
             <header>
                 <div className='Titulo'>
                     <a href="/">
-                        <h1>ImmersiRoom</h1>
+                        <img src="src/img/titulo.png" alt="" />
                     </a>
                 </div>
-                <div>
+                <div className='barra_derecha'>
                     <a href="/Categorias">Categorias</a>
                     <a href="">Cocina</a>
                     <a href="">Baño</a>
@@ -24,7 +24,24 @@ function HomePage() {
                 </div>
             </header>
             <main>
-                
+                <h1>Products</h1>
+                <div className='products'>
+                    <div className='icono'>
+                        <img src="src/img/mueblebaño.png" alt="" />
+                        <h3>Mueble baño</h3>
+                        <p>Mueble De Baño Amaretto Miel 46x 61.5 x 47 cm con Lavamanos Blanco</p>
+                    </div>
+                    <div className='icono'>
+                        <img src="src/img/mueblebaño.png" alt="" />
+                        <h3>Mueble baño</h3>
+                        <p>Mueble De Baño Amaretto Miel 46x 61.5 x 47 cm con Lavamanos Blanco</p>
+                    </div>
+                    <div className='icono'>
+                        <img src="src/img/mueblebaño.png" alt="" />
+                        <h3>Mueble baño</h3>
+                        <p>Mueble De Baño Amaretto Miel 46x 61.5 x 47 cm con Lavamanos Blanco</p>
+                    </div>
+                </div>
             </main>
         </body>
     );
