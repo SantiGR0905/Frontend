@@ -24,7 +24,7 @@ const CreateUser = () => {
         e.preventDefault();
         try {
             const response = await axios.post(
-                "http://retailspace.somee.com/api/Users",
+                "https://retailspace.somee.com/api/Users",
                 {
                     firstName: formData.firstName,
                     lastName: formData.lastName,
