@@ -2,11 +2,10 @@
 import React, { useState } from 'react';
 import CategoryList from '../Components/CategoryList.jsx';
 import ProductList from '../Components/ProductList.jsx';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function HomePage() {
     const [selectedCategory, setSelectedCategory] = useState(null);
-    const navigate = useNavigate();
     
 
     return (
@@ -21,7 +20,7 @@ function HomePage() {
                     <a href="/Categorias">Categorias</a>
                     <a href="">Cocina</a>
                     <a href="">Baño</a>
-                    <a href="/login">Log In</a>
+                    <Link to="/login">Log In</Link>
                 </div>
             </header>
             <main>
