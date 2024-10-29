@@ -1,0 +1,19 @@
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Directorio de salida de la construcción
+dist/
+build/
+
+# Archivos de configuración de sistema operativo
+.DS_Store
+Thumbs.db
+
+# Dependencias de paquetes y archivos de bloqueo
+package-lock.json
+yarn.lock
