@@ -112,7 +112,7 @@ const CreateUser = () => {
                         required
                     />
                 </div>
-                <button type="submit">Create User</button>
+                <button type="submit">Registrarse</button>
             </form>
         </div>
         </body>
