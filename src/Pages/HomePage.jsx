@@ -21,7 +21,7 @@ function HomePage() {
                     <a href="/Categorias">Categorias</a>
                     <a href="">Cocina</a>
                     <a href="">Baño</a>
-                    <a href="/login">Log In</a>
+                    <a href="/login.jsx">Log In</a>
                 </div>
             </header>
             <main>
