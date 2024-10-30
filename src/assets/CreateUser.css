@@ -68,3 +68,10 @@ input[type="number"] {
 .User button:hover {
     background-color: #0056b3;
 }
+
+select {
+    width: 100%;
+    padding: 0.75rem 0 0.75rem 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}

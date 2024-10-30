@@ -29,7 +29,7 @@ const CreateUser = () => {
                     lastName: formData.lastName,
                     email: formData.email,
                     password: formData.password,
-                    userTypeId: 1,
+                    userTypeId: 2,
                 }
             );
             alert("User created successfully.");

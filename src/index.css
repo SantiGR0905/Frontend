@@ -67,7 +67,20 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.postheader {
+  display: flex;
+  padding: 3rem 10rem 0 10rem;
+  img {
+    height: 30rem;
+    padding-left: 10rem;
+  }
+  p {
+    font-size: 1.5rem;
+  }
+}
+
 .products {
+  padding: 0 10rem;
   display: grid;
   gap: 2rem;
   grid-template-columns: repeat(3, 1fr);
@@ -75,10 +88,16 @@ button:focus-visible {
 
 .icono {
   text-align: center;
+  background-color: #e1e1e1;
+  border: 1px solid darken;
+  margin-bottom: 2rem;
   img {
-    height: 10rem;
+    /* height: 10rem; */
+    width: 100%;
+    display: block;
   }
   h3 {
     text-transform: uppercase;
   }
 }
+
