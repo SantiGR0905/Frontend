@@ -9,7 +9,7 @@ function HomePage() {
     
 
     return (
-        <body>
+        <div className='body'>
             <header>
                 <div className='Titulo'>
                     <a href="/">
@@ -55,7 +55,7 @@ function HomePage() {
                     </div>
                 </div>
             </main>
-        </body>
+        </div>
     );
 }
 

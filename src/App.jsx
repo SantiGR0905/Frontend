@@ -1,26 +1,37 @@
 // src/App.jsx
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {Routes, Route } from 'react-router-dom';
 import HomePage from './Pages/HomePage.jsx';
 import Login from './Pages/Login.jsx';
+import Admin from './Pages/Admin.jsx';
 import './App.css';
 import CreateUser from './Pages/CreateUser.jsx';
 import CreateProduct from './Pages/CreateProduct.jsx';
 import Sales from './Pages/Sales.jsx';
+import ProtectedRoute from "./Components/ProtectedRoute.jsx";
+import { AuthProvider } from './Services/AuthContext.jsx';
 
 function App() {
     return (
-        <Router>
+        <AuthProvider>
             <div className="App">
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/login" element={<Login />} />
+                    <Route
+                        path="/Admin"
+                        element={
+                            <ProtectedRoute requiredUserType={1} requiredPermission={1}>
+                                <Admin />
+                            </ProtectedRoute>
+                        }
+                    />
                     <Route path="/CreateUser" element={<CreateUser />} />
                     <Route path="/CreateProduct" element={<CreateProduct />} />
                     <Route path="/Sales" element={<Sales />} />
                 </Routes>
             </div>
-        </Router>
+        </AuthProvider>
     );
 }
 
