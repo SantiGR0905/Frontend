@@ -22,6 +22,7 @@ function HomePage() {
                     <a href="">Baño</a>
                     <Link to="/login">Log In</Link>
                     <Link to="/createProduct">Producto</Link>
+                    <Link to="/Sales">Ventas</Link>
                 </div>
             </header>
             <main>

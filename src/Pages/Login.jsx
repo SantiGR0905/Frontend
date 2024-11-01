@@ -17,7 +17,7 @@ const Login = () => {
 
         try {
             const response = await fetch(
-                "http://retailspace.somee.com/api/Users/login",
+                "https://retailspace.somee.com/api/Users/login",
                 {
                     method: "POST",
                     headers: {

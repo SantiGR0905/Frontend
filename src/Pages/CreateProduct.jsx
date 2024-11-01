@@ -17,7 +17,7 @@ const CreateProduct = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await axios.get("http://retailspace.somee.com/api/Categories");
+                const response = await axios.get("https://retailspace.somee.com/api/Categories");
                 setCategories(response.data);
             } catch (error) {
                 console.error("Error fetching categories:", error);
@@ -39,7 +39,7 @@ const CreateProduct = () => {
         e.preventDefault();
         try {
             const response = await axios.post(
-                "http://retailspace.somee.com/api/Products",
+                "https://retailspace.somee.com/api/Products",
                 {
                     productName: formData.productName,
                     description: formData.description,
