@@ -1,184 +1,152 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "../assets/CreateUser.css";
 
 const Sales = () => {
-    const [sales, setSales] = useState([]);
-    const [newSale, setNewSale] = useState({
-        saleDate: "",
-        stateSale: 1,
+    const [formData, setFormData] = useState({
+        stateSale: "",
         direction: "",
-        userId: 0,
-        productId: 0,
+        userId: "",
+        productId: "",
     });
-    const [editingSale, setEditingSale] = useState(null);
 
+    const [users, setUsers] = useState([]);
+    const [products, setProducts] = useState([]);
+
+    // Obtener usuarios y productos desde el backend
     useEffect(() => {
-        fetchSales();
+        const fetchUsers = async () => {
+            try {
+                const response = await axios.get("https://retailspace.somee.com/api/Users");
+                setUsers(response.data);
+            } catch (error) {
+                console.error("Error fetching users:", error);
+            }
+        };
+
+        const fetchProducts = async () => {
+            try {
+                const response = await axios.get("https://retailspace.somee.com/api/Products");
+                setProducts(response.data);
+            } catch (error) {
+                console.error("Error fetching products:", error);
+            }
+        };
+
+        fetchUsers();
+        fetchProducts();
     }, []);
 
-    // Fetch all sales from the API
-    const fetchSales = async () => {
-        try {
-            const response = await fetch(
-                "http://retailspace.somee.com/api/sales"
-            );
-            if (!response.ok) throw new Error("Failed to fetch sales");
-
-            const data = await response.json();
-            setSales(data);
-        } catch (error) {
-            console.error("Error fetching sales:", error);
-        }
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
     };
 
-    // Handle input change
-    const handleInputChange = (e) => {
-        const {name, value} = e.target;
-        setNewSale({...newSale, [name]: value});
-    };
-
-    // Handle creating a new sale
-    const handleCreateSale = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        // Concatenar country, state y address en el campo direction
         try {
-            const response = await fetch(
-                "http://retailspace.somee.com/api/sales",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(newSale),
-                }
-            );
-            if (!response.ok) throw new Error("Failed to create sale");
-
-            fetchSales(); // Refresh sales list after creating a new sale
-            setNewSale({
-                saleDate: "",
+            await axios.post("https://retailspace.somee.com/api/Sales", {
                 stateSale: 1,
-                direction: "",
-                userId: 0,
-                productId: 0,
+                direction: `${formData.country}, ${formData.state}, ${formData.town},${formData.address}`,
+                userId: formData.userId,
+                productId: formData.productId,
             });
+            alert("Venta creada exitosamente.");
         } catch (error) {
-            console.error("Error creating sale:", error);
-        }
-    };
-
-    // Handle updating an existing sale
-    const handleUpdateSale = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await fetch(
-                `http://retailspace.somee.com/api/sales/${editingSale.saleId}`,
-                {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(newSale),
-                }
-            );
-            if (!response.ok) throw new Error("Failed to update sale");
-
-            fetchSales(); // Refresh sales list after updating
-            setEditingSale(null);
-            setNewSale({
-                saleDate: "",
-                stateSale: 1,
-                direction: "",
-                userId: 0,
-                productId: 0,
-            });
-        } catch (error) {
-            console.error("Error updating sale:", error);
-        }
-    };
-
-    // Handle deleting a sale
-    const handleDeleteSale = async (id) => {
-        try {
-            const response = await fetch(
-                `http://retailspace.somee.com/api/sales/${id}`,
-                {
-                    method: "DELETE",
-                }
-            );
-            if (!response.ok) throw new Error("Failed to delete sale");
-
-            fetchSales(); // Refresh sales list after deleting
-        } catch (error) {
-            console.error("Error deleting sale:", error);
+            console.error("Error creando la venta:", error);
+            alert("Fallo en la creación de la venta.");
         }
     };
 
     return (
-        <div>
-            <h1>Sales Management</h1>
-            <form onSubmit={editingSale ? handleUpdateSale : handleCreateSale}>
-                <input
-                    type="date"
-                    name="saleDate"
-                    value={newSale.saleDate}
-                    onChange={handleInputChange}
-                    required
-                />
-                <input
-                    type="number"
-                    name="stateSale"
-                    placeholder="State Sale"
-                    value={newSale.stateSale}
-                    onChange={handleInputChange}
-                    required
-                />
-                <input
-                    type="text"
-                    name="direction"
-                    placeholder="Direction"
-                    value={newSale.direction}
-                    onChange={handleInputChange}
-                    required
-                />
-                <input
-                    type="number"
-                    name="userId"
-                    placeholder="User ID"
-                    value={newSale.userId}
-                    onChange={handleInputChange}
-                    required
-                />
-                <input
-                    type="number"
-                    name="productId"
-                    placeholder="Product ID"
-                    value={newSale.productId}
-                    onChange={handleInputChange}
-                    required
-                />
-                <button type="submit">
-                    {editingSale ? "Update Sale" : "Add Sale"}
-                </button>
+        <body className="User">
+        <div className="UserContainer">
+            <h2>Crear Venta</h2>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label>País:</label>
+                    <input
+                        placeholder="País"
+                        type="text"
+                        name="country"
+                        value={formData.country}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Departamento:</label>
+                    <input
+                        placeholder="Departamento"
+                        type="text"
+                        name="state"
+                        value={formData.state}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Municipio:</label>
+                    <input
+                        placeholder="Municipio"
+                        type="text"
+                        name="town"
+                        value={formData.town}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Dirección:</label>
+                    <input
+                        placeholder="Dirección"
+                        type="text"
+                        name="address"
+                        value={formData.address}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Usuario:</label>
+                    <select
+                        name="userId"
+                        value={formData.userId}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value="">Seleccionar Usuario</option>
+                        {users.map((user) => (
+                            <option key={user.userId} value={user.userId}>
+                                {user.email}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div>
+                    <label>Producto:</label>
+                    <select
+                        name="productId"
+                        value={formData.productId}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value="">Seleccionar Producto</option>
+                        {products.map((product) => (
+                            <option key={product.productId} value={product.productId}>
+                                {product.productName}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <button type="submit">Crear Venta</button>
             </form>
-
-            <h2>Sales List</h2>
-            <ul>
-                {sales.map((sale) => (
-                    <li key={sale.saleId}>
-                        <p>Date: {sale.saleDate}</p>
-                        <p>State: {sale.stateSale}</p>
-                        <p>Direction: {sale.direction}</p>
-                        <p>User ID: {sale.userId}</p>
-                        <p>Product ID: {sale.productId}</p>
-                        <button onClick={() => setEditingSale(sale)}>
-                            Edit
-                        </button>
-                        <button onClick={() => handleDeleteSale(sale.saleId)}>
-                            Delete
-                        </button>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        </div>    
+        </body>
     );
 };
 
