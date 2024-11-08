@@ -92,7 +92,7 @@ const Login = () => {
                 console.log("UserTypeId:", loggedInUser.userTypes.userTypeId, "Type:", typeof loggedInUser.userTypes.userTypeId);
                 console.log("Permission found:", permission);
                 console.log("Permission UserTypeId:", permission.userTypes.userTypeId);
-                console.log("Permission Id:", permission.permissions.permissionId);
+                console.log("Permission Id:", permission.permissions.permissionId); 
 
                 // Usar directamente los IDs, asumiendo que ya son números
                 const userTypeId = loggedInUser.userTypes.userTypeId; 

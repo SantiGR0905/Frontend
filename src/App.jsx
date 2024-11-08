@@ -8,6 +8,7 @@ import './App.css';
 import CreateUser from './Pages/CreateUser.jsx';
 import CreateProduct from './Pages/CreateProduct.jsx';
 import Sales from './Pages/Sales.jsx';
+import Users from './Pages/Users.jsx';
 import ProtectedRoute from "./Components/ProtectedRoute.jsx";
 import { AuthProvider } from './Services/AuthContext.jsx';
 
@@ -26,8 +27,23 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
+                    <Route
+                        path="/CreateProduct"
+                        element={
+                            <ProtectedRoute requiredUserType={1} requiredPermission={1}>
+                                <CreateProduct />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/Users"
+                        element={
+                            <ProtectedRoute requiredUserType={1} requiredPermission={1}>
+                                <Users />
+                            </ProtectedRoute>
+                        }
+                    />
                     <Route path="/CreateUser" element={<CreateUser />} />
-                    <Route path="/CreateProduct" element={<CreateProduct />} />
                     <Route path="/Sales" element={<Sales />} />
                 </Routes>
             </div>

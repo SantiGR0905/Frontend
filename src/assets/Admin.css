@@ -1,0 +1,79 @@
+.admin-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    align-items: center;
+}
+
+.admin-container h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+}
+
+.product-table thead {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+.product-table th, .product-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+.product-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.btn {
+    padding: 8px 12px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.update-btn {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.update-btn:hover {
+    background-color: #218838;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+
+
+.Register-Product {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.Register-Product a{
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 700;
+    background-color: #218838;
+    padding: 1rem 2rem;
+    margin: 0 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

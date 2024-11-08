@@ -15,7 +15,7 @@ function CategoryList({ onCategorySelect }) {
 
     return (
         <div className="category-list">
-            <h3>Categorías</h3>
+            <h3>Categorías  </h3>
             <ul>
                 {categories.map(category => (
                     <li key={category.categoryId} onClick={() => onCategorySelect(category.categoryId)}>
