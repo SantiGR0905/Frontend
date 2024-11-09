@@ -92,7 +92,6 @@ const Login = () => {
             const loggedInUser = users.find(user => user.email === email);
 
             if (loggedInUser) {
-                // Guarda el userId en el almacenamiento local
                 localStorage.setItem("userId", loggedInUser.userId);
 
                 const permission = permissionxusers.find(

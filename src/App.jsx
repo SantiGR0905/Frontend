@@ -6,6 +6,7 @@ import Login from './Pages/Login.jsx';
 import Admin from './Pages/Admin.jsx';
 import './App.css';
 import CreateUser from './Pages/CreateUser.jsx';
+import UpdateUser from './Pages/UpdateUser.jsx';
 import Products from './Pages/Products.jsx';
 import CreateProduct from './Pages/CreateProduct.jsx';
 import UpdateProduct from './Pages/UpdateProduct.jsx';
@@ -73,6 +74,7 @@ function App() {
                         }
                     />
                     <Route path="/CreateUser" element={<CreateUser />} />
+                    <Route path="/UpdateUser" element={<UpdateUser />} />
                     <Route path="/Sales" element={<Sales />} />
                 </Routes>
             </div>

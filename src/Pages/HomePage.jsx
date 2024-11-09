@@ -32,12 +32,7 @@ function HomePage() {
                     </a>
                 </div>
                 <div className='barra_derecha'>
-                    <a href="/Categorias">Categorias</a>
-                    <a href="">Cocina</a>
-                    <a href="">Baño</a>
                     <Link to="/login">Log In</Link>
-                    <Link to="/createProduct">Producto</Link>
-                    <Link to="/Sales">Ventas</Link>
                 </div>
             </header>
             <main>

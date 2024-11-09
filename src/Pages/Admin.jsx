@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import '../assets/Admin.css'; 
+import { useAuth } from '../Services/AuthContext.jsx'; 
 
 const Admin = () => {
     const [products, setProducts] = useState([]);
+    const {logout} = useAuth(); 
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -35,6 +37,22 @@ const Admin = () => {
     
 
     return (
+        <div className='body'>
+        <header>
+                <div className='Titulo'>
+                    <a href="/">
+                        <img src='img/titulo.png' alt="" />
+                    </a>
+                </div>
+                <div className='barra_derecha'>
+                    <button 
+                        onClick={() => {
+                        if (window.confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                        logout(); 
+                        }
+                    }}>LogOut</button>
+                </div>
+            </header>
         <div className="admin-container">
             <h2>Admin</h2>
                 <div className='Register-Product'>
@@ -70,6 +88,7 @@ const Admin = () => {
                         ))}
                     </tbody>
                 </table>
+        </div>
         </div>
     );
 };

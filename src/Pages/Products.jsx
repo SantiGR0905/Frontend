@@ -6,11 +6,11 @@ import Cart from './Cart.jsx';
 import { useAuth } from '../Services/AuthContext.jsx'; 
 
 const Products = () => {
-    const { userId } = useAuth(); 
+    const { userId, logout} = useAuth(); 
     const [products, setProducts] = useState([]);
     const [showCart, setShowCart] = useState(false);
     const [cartId, setCartId] = useState(null);
-    const [loadingCart, setLoadingCart] = useState(true); // Estado de carga del carrito
+    const [loadingCart, setLoadingCart] = useState(true); 
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -109,6 +109,22 @@ const Products = () => {
     };
     
     return (
+        <div className='body'>
+        <header>
+                <div className='Titulo'>
+                    <a href="/">
+                        <img src='img/titulo.png' alt="" />
+                    </a>
+                </div>
+                <div className='barra_derecha'>
+                <button 
+                        onClick={() => {
+                        if (window.confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                        logout(); 
+                        }
+                    }}>LogOut</button>
+                </div>
+            </header>
         <div className='product-page'>
             <h1>Productos Disponibles</h1>
             <button onClick={() => setShowCart(!showCart)}>
@@ -129,6 +145,7 @@ const Products = () => {
                     ))
                 )}
             </div>
+        </div>
         </div>
     );
 };
