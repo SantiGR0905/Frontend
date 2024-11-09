@@ -3,11 +3,9 @@ import { useAuth } from "../Services/AuthContext.jsx";
 import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectedRoute = ({ children, requiredUserType, requiredPermission }) => {
-    const { userTypeId, permissionId } = useAuth();
+    const { userId, userTypeId, permissionId } = useAuth();
 
-    console.log(userTypeId);
-    console.log(permissionId)
-    if (userTypeId !== requiredUserType || permissionId !== requiredPermission) {
+    if (userTypeId !== requiredUserType || permissionId !== requiredPermission ) {
         return <Navigate to="/" replace />;
     }
 

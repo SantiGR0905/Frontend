@@ -75,3 +75,22 @@ select {
     border: 1px solid #ddd;
     border-radius: 5px;
 }
+
+.UserContainer a{
+    color: #000000;
+    font-size: 1rem;
+}
+
+.UserContainer a:hover{
+    color: #333;
+}
+
+.Registrar a{
+    color: #0056b3;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.Registrar a:hover {
+    color:#0056b3;
+}

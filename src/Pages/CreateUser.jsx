@@ -13,13 +13,18 @@ const CreateUser = () => {
         acceptPolicy: false, // Nueva propiedad para aceptar la política
     });
     const [errors, setErrors] = useState({});
+    const [globalError, setGlobalError] = useState("");
 
     // Validación de campos de usuario
     const validateUserFields = () => {
         const newErrors = {};
-        if (!formData.firstName) newErrors.firstName = "El nombre es obligatorio.";
-        if (!formData.lastName) newErrors.lastName = "El apellido es obligatorio.";
-        if (!formData.email) newErrors.email = "El correo electrónico es obligatorio.";
+        if (!formData.firstName.trim()) newErrors.firstName = "El nombre es obligatorio.";
+        else if (formData.firstName.length < 2) newErrors.firstName = "El nombre debe tener al menos 2 caracteres.";
+        
+        if (!formData.lastName.trim()) newErrors.lastName = "El apellido es obligatorio.";
+        else if (formData.lastName.length < 2) newErrors.lastName = "El apellido debe tener al menos 2 caracteres.";
+        
+        if (!formData.email.trim()) newErrors.email = "El correo electrónico es obligatorio.";
         else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Formato de correo inválido.";
         
         setErrors(newErrors);
@@ -28,14 +33,14 @@ const CreateUser = () => {
 
     // Validación de la política de contraseña
     const validatePassword = () => {
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
         if (!formData.password) {
             setErrors(prevErrors => ({ ...prevErrors, password: "La contraseña es obligatoria." }));
             return false;
         } else if (!passwordRegex.test(formData.password)) {
             setErrors(prevErrors => ({
                 ...prevErrors,
-                password: "La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y caracteres especiales.",
+                password: "La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y caracteres especiales (@$!%*?&).",
             }));
             return false;
         }
@@ -64,6 +69,9 @@ const CreateUser = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Limpiar error global
+        setGlobalError("");
+
         // Validación de campos, contraseña y políticas
         const isUserValid = validateUserFields();
         const isPasswordValid = validatePassword();
@@ -85,12 +93,12 @@ const CreateUser = () => {
             alert("Usuario creado exitosamente.");
         } catch (error) {
             console.error("Error al crear el usuario:", error);
-            alert("Fallo al crear el usuario.");
+            setGlobalError("Fallo al crear el usuario. Por favor, intente nuevamente.");
         }
     };
 
     return (
-        <body className="User">
+        <div className="User">
         <div className="UserContainer">
             <h2>Registrarse</h2>
             <form onSubmit={handleSubmit}>
@@ -147,20 +155,21 @@ const CreateUser = () => {
                     />
                     <label>
                         Acepto las{" "}
-                        <Link to="/politica-de-privacidad" target="_blank">
-                            políticas de tratamiento de datos
-                        </Link>
+                        <a href="https://www.mincit.gov.co/getattachment/transparencia-y-acceso-a-la-informacion-publica/2-normativa/2-1-normativa-de-la-entidad-o-autoridad/politicas-lineamientos-y-manuales/2-1-5-3-manuales/2-1-5-3-6-manual-de-politicas-de-seguridad-y-priva/gtimo002-manual-polticas-sgspi.pdf.aspx">
+                        políticas de tratamiento de datos
+                        </a>
                     </label>
                     {errors.acceptPolicy && <p className="error">{errors.acceptPolicy}</p>}
                 </div>
                 <button type="submit">Registrarse</button>
+                {globalError && <p className="error">{globalError}</p>}
                 <div className="Registrar">
                     <p>¿Ya tienes cuenta?</p>
                     <Link to="/login">Iniciar Sesión</Link>
                 </div>
             </form>
         </div>
-        </body>
+        </div>
     );
 };
 

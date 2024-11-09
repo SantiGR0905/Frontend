@@ -19,17 +19,18 @@ const Admin = () => {
     }, []);
 
     const handleDelete = async (id) => {
+        const confirmDelete = window.confirm('¿Estás seguro de que deseas eliminar este producto?');
+        if (!confirmDelete) {
+            return;
+        }
+    
         try {
             await axios.delete(`https://retailspace.somee.com/api/Products/${id}`);
             setProducts(products.filter(product => product.productId !== id));
-            alert('Product deleted successfully');
+            alert('Producto eliminado exitosamente');
         } catch (error) {
-            console.error('Error deleting product:', error);
+            console.error('Error al eliminar el producto:', error);
         }
-    };
-
-    const handleUpdate = (product) => {
-        console.log('Update product:', product);
     };
     
 
@@ -61,8 +62,8 @@ const Admin = () => {
                                 <td>{product.categories ? product.categories.categoryName : "No disponible"}</td>
                                 <td>{product.price}</td>
                                 <td>{product.stock}</td>
-                                <td>
-                                    <button className="btn update-btn" onClick={() => handleUpdate(product)}>Update</button>
+                                <td className='Botones'>
+                                    <Link to={`/UpdateProduct/${product.productId}`} className='btn update-btn'>Update</Link>
                                     <button className="btn delete-btn" onClick={() => handleDelete(product.productId)}>Delete</button>
                                 </td>
                             </tr>

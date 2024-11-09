@@ -20,7 +20,6 @@ const Login = () => {
                 const response = await axios.get("https://retailspace.somee.com/api/PermissionsXUsers");
                 if (Array.isArray(response.data)) {
                     setPermissionsXUser(response.data);
-                    console.log("Fetched permissionxusers:", response.data);
                 } else {
                     console.error("Expected an array but received:", response.data);
                 }
@@ -34,7 +33,6 @@ const Login = () => {
                 const response = await axios.get("https://retailspace.somee.com/api/Users");
                 if (Array.isArray(response.data)) {
                     setUser(response.data);
-                    console.log("Fetched users:", response.data);
                 } else {
                     console.error("Expected an array but received:", response.data);
                 }
@@ -47,13 +45,22 @@ const Login = () => {
         fetchUser();
     }, []);
 
+    const validateLoginFields = () => {
+        if (!email || !password) {
+            setErrorMessage("Por favor, completa todos los campos.");
+            return false;
+        }
+        return true;
+    };
+
     const handleLogin = async (e) => {
         e.preventDefault();
+        setErrorMessage(""); 
 
-        const loginData = {
-            email: email,
-            password: password,
-        };
+        // Validar campos vacíos
+        if (!validateLoginFields()) return;
+
+        const loginData = { email, password };
 
         try {
             const response = await fetch(
@@ -67,53 +74,54 @@ const Login = () => {
                 }
             );
 
-            if (!response.ok) {
+            if (response.status === 404) {
+                // Si el código de estado es 404, significa que las credenciales son incorrectas
+                setErrorMessage("Credenciales incorrectas. Por favor, verifica tu correo y contraseña.");
+                return;
+            } else if (!response.ok) {
+                // Si hay otros errores no relacionados con autenticación
                 const errorData = await response.json();
-                setErrorMessage("Login failed: " + errorData.message);
-                throw new Error(`Error ${response.status}: ${response.statusText}`);
+                setErrorMessage("Error al iniciar sesión: " + (errorData.message || "Error desconocido."));
+                return;
             }
+    
 
             const data = await response.json();
             console.log("Login successful", data);
 
-            // Buscar el usuario en la lista de users usando el email
             const loggedInUser = users.find(user => user.email === email);
-    
+
             if (loggedInUser) {
-                const permission = permissionxusers.find((permissionxuser) =>
-                    loggedInUser.userTypes.userTypeId === permissionxuser.userTypes.userTypeId
+                // Guarda el userId en el almacenamiento local
+                localStorage.setItem("userId", loggedInUser.userId);
+
+                const permission = permissionxusers.find(
+                    (permissionxuser) => loggedInUser.userTypes.userTypeId === permissionxuser.userTypes.userTypeId
                 );
-                login(permission.userTypes.userTypeId, permission.permissions.permissionId);
+
                 if (!permission) {
-                    setErrorMessage("No permissions found for this user.");
-                    return; 
+                    setErrorMessage("No se encontraron permisos para este usuario.");
+                    return;
                 }
 
-                console.log("UserTypeId:", loggedInUser.userTypes.userTypeId, "Type:", typeof loggedInUser.userTypes.userTypeId);
-                console.log("Permission found:", permission);
-                console.log("Permission UserTypeId:", permission.userTypes.userTypeId);
-                console.log("Permission Id:", permission.permissions.permissionId); 
-
-                // Usar directamente los IDs, asumiendo que ya son números
-                const userTypeId = loggedInUser.userTypes.userTypeId; 
-                const permissionId = permission.permissions.permissionId;
-
-                // Verificar y redirigir según los permisos
-                if (userTypeId === 1 && permissionId === 1) {
+                // Iniciar sesión y redirigir según el tipo de usuario y permisos
+                login(loggedInUser.userId, permission.userTypes.userTypeId, permission.permissions.permissionId);
+                if (loggedInUser.userTypes.userTypeId === 1 && permission.permissions.permissionId === 1) {
                     localStorage.setItem("userTypeId", permission.userTypes.userTypeId);
                     localStorage.setItem("permissionId", permission.permissions.permissionId);
-                    console.log("Redirigiendo a Admin");
                     navigate("/Admin");
+                } else if (loggedInUser.userTypes.userTypeId === 2 && permission.permissions.permissionId === 2) {
+                    localStorage.setItem("userTypeId", permission.userTypes.userTypeId);
+                    localStorage.setItem("permissionId", permission.permissions.permissionId);
+                    navigate("/Products");
                 } else {
-                    console.log("Redirigiendo a la Home");
                     navigate("/");
                 }
             } else {
-                setErrorMessage("User not found.");
+                setErrorMessage("Usuario no encontrado.");
             }
         } catch (error) {
-            console.error("Login failed:", error.message);
-            setErrorMessage("Failed to login: " + error.message);
+            setErrorMessage("Error al conectar con el servidor. Inténtalo de nuevo más tarde.");
         }
     };
 
@@ -121,7 +129,7 @@ const Login = () => {
         <div className="login">
             <div className="login-container">
                 <h2>Iniciar Sesión</h2>
-                {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+                {errorMessage && <p className="error">{errorMessage}</p>}
                 <form onSubmit={handleLogin}>
                     <div>
                         <label>Email:</label>

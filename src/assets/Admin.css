@@ -77,3 +77,6 @@
     border-radius: 4px;
     cursor: pointer;
 }
+.Botones {
+    display: flex;
+}

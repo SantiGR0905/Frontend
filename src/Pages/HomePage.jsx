@@ -28,7 +28,7 @@ function HomePage() {
             <header>
                 <div className='Titulo'>
                     <a href="/">
-                        <img src='public/img/titulo.png' alt="" />
+                        <img src='img/titulo.png' alt="" />
                     </a>
                 </div>
                 <div className='barra_derecha'>
@@ -43,17 +43,12 @@ function HomePage() {
             <main>
                 <div className='postheader'>
                     <p>Plataforma de visualización para la compra de muebles en línea que brinda una experiencia inmersiva en 3D donde permite a los usuarios personalizar y visualizar muebles en sus propios espacios mediante realidad aumentada y entornos virtuales, buscando facilitar la elección de colores, materiales y disposición de los muebles de forma realista reduciendo así la incertidumbre y errores en las decisiones de compra.</p>
-                    <img src='public/img/homepage.webp' alt="" />
+                    <img src='img/homepage.webp' alt="" />
                 </div>
                 <h1>Products</h1>
                 <div className='products'>
-                    {/* Mapea los productos y muestra la información */}
                     {products.map((product) => {
-                        // Concatenar baseURL con product.image
-                        console.log(product.image);
                         const imageURL = baseURL + product.image;
-                        // Imprimir en consola la URL completa
-                        console.log("URL de la imagen del producto:", imageURL);
                         return (
                             <div key={product.productId} className='icono'>
                                 <img src={imageURL} />
