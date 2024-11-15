@@ -9,7 +9,7 @@ const CreateUser = () => {
         lastName: "",
         email: "",
         password: "",
-        confirmPassword: "", // Nueva propiedad para confirmar contraseña
+        confirmPassword: "", 
         userTypeId: 2,
         acceptPolicy: false,
     });
