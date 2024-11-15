@@ -6,6 +6,7 @@ const ProductCard = ({ product, onAddToCart }) => {
         <h3>{product.productName}</h3>
         <img src={'https://www.retailspace.somee.com' + product.image} alt={product.productName} className="product-image" />
         <p>${product.price}</p>
+        <p> {product.categories.categoryName}</p>
         <button onClick={() => onAddToCart(product)}>Agregar al carrito</button>
         </div>
     );

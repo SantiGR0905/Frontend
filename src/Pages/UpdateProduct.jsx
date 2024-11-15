@@ -18,11 +18,9 @@ const UpdateProduct = () => {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // Cargar los datos del producto existente y las categorías
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Obtener datos del producto
                 const productResponse = await axios.get(`https://retailspace.somee.com/api/Products/${id}`);
                 setFormData({
                     productName: productResponse.data.productName,
@@ -33,7 +31,6 @@ const UpdateProduct = () => {
                     categoryId: productResponse.data.categoryId,
                 });
 
-                 //Obtener categorías
                 const categoriesResponse = await axios.get("https://retailspace.somee.com/api/Categories");
                 setCategories(categoriesResponse.data);
                 setLoading(false);

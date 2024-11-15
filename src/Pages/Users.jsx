@@ -18,6 +18,10 @@ const Users = () => {
     }, []);
 
     const userDelete = async (id) => {
+        const confirmDelete = window.confirm('¿Estás seguro de que deseas eliminar este producto?');
+        if (!confirmDelete) {
+            return;
+        }
         try {
             await axios.delete(`https://retailspace.somee.com/api/Users/${id}`);
             setUsers(users.filter(user => user.userId !== id));
@@ -55,7 +59,6 @@ const Users = () => {
                             <td>{new Date(user.date).toLocaleDateString()}</td>
                             <td>{user.userTypes.userType}</td>
                             <td>
-                                <button className='btn update' onClick={() => userUpdate(user)}>Update</button>
                                 <button className='btn delete' onClick={() => userDelete(user.userId)}>Delete</button>
                             </td>
                         </tr>

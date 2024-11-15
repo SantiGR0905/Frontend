@@ -12,7 +12,7 @@ import CreateProduct from './Pages/CreateProduct.jsx';
 import UpdateProduct from './Pages/UpdateProduct.jsx';
 import ProductCard from './Components/ProductCard.jsx';
 import Cart from './Pages/Cart.jsx';
-import Sales from './Pages/Sales.jsx';
+import CreateSale from './Pages/CreateSale.jsx';
 import Users from './Pages/Users.jsx';
 import ProtectedRoute from "./Components/ProtectedRoute.jsx";
 import { AuthProvider } from './Services/AuthContext.jsx';
@@ -39,6 +39,14 @@ function App() {
                             <ProtectedRoute requiredUserType={2} requiredPermission={2}>
                                 <Cart />
                             </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/CreateSale"
+                        element={
+                            <ProtectedRoute requiredUserType={2} requiredPermission={2}>
+                                <CreateSale />
+                            </ProtectedRoute>                            
                         }
                     />
                     <Route
@@ -75,7 +83,6 @@ function App() {
                     />
                     <Route path="/CreateUser" element={<CreateUser />} />
                     <Route path="/UpdateUser" element={<UpdateUser />} />
-                    <Route path="/Sales" element={<Sales />} />
                 </Routes>
             </div>
         </AuthProvider>
